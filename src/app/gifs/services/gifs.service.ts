@@ -9,7 +9,7 @@ export class GifsService {
     private url:string='https://api.giphy.com/v1/gifs/search';
     private tagsHistory:string[]=[];
 
-    private gifsList:Gif[]=[];
+    public gifsList:Gif[]=[];
     
     constructor(private http:HttpClient) { }
 
