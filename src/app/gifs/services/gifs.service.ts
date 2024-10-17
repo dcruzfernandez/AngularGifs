@@ -11,7 +11,11 @@ export class GifsService {
 
     public gifsList:Gif[]=[];
     
-    constructor(private http:HttpClient) { }
+    constructor(private http:HttpClient) { 
+        this.leerHistorial();
+        if(this.tagsHistory.length===0) return;
+        this.buscarTag(this.tagsHistory[0]);
+    }
 
     get TagHistory():string[]{
         //evita que retorne la referencia
@@ -25,6 +29,17 @@ export class GifsService {
         }
         this.tagsHistory.unshift(tag);
         this.tagsHistory=this.tagsHistory.splice(0,10);
+        this.guardarHistorial();
+    }
+
+    private guardarHistorial():void{
+        localStorage.setItem('historial',JSON.stringify(this.tagsHistory));
+    }
+
+    private leerHistorial():void{
+        if(!localStorage.getItem('historial')) return;
+
+        this.tagsHistory=JSON.parse(localStorage.getItem('historial')!)
     }
 
     buscarTag(tag:string):void{
