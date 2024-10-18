@@ -7,7 +7,6 @@ import { Gif, Onclick } from '../../interfaces/Gifs.interface';
 })
 export class GifsCardComponent implements OnInit {
  
-
   ngOnInit(): void {
     if(!this.gif) throw new Error('Gif property is required')
   }
